@@ -1,0 +1,19 @@
+{
+  "name": "merrjepautomation",
+  "version": "1.0.0",
+  "description": "renew posts on merrjep.al automatically",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web",
+    "automation"
+  ],
+  "author": "Klajdi Oshafi",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^21.6.1"
+  },
+  "type": "module"
+}
