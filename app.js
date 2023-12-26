@@ -13,12 +13,14 @@ import { MerrjepCredentials } from './credentials.js';
   await page.setViewport({width: 1920, height: 1080});
   const result = await page.evaluate(() => {
     let emailInput = document.getElementById("EmailOrPhone");
-    let credentials = new MerrjepCredentials();
-    // emailInput.value = "klajdioshafi99@gmail.com";
-    emailInput.value = credentials.email;
+    emailInput.value = "denis.kallcaku@hotmail.com";
     let loginBtn = document.querySelectorAll(".btn.btn-block");
     loginBtn[0].click();
-    return emailInput;
+    let passwordInput = document.querySelector("input.form-control");
+    passwordInput.value = "1478963denisi";
+    let login = document.querySelector("body > div.website-wrapper > div.container-fluid > div > div.col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.pl-0.pr-0 > section > div > div > div > div > div.ui-form > form > button");
+    login.click();
+    return passwordInput;
   });
 
   console.log(result);

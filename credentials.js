@@ -2,7 +2,7 @@ export class MerrjepCredentials {
 
     constructor() {
         this.email = "denis.kallcaku@hotmail.com";
-        this.password = "";
+        this.password = "1478963denisi";
     }
 
     getEmail() {
