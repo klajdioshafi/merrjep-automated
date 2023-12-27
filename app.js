@@ -20,8 +20,7 @@ import puppeteer from 'puppeteer';
   await page.type("input.form-control", "1478963denisi");
   await page.click("body > div.website-wrapper > div.container-fluid > div > div.col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.pl-0.pr-0 > section > div > div > div > div > div.ui-form > form > button");
   
-  await page.waitForSelector("body > div.website-wrapper");
-  await page.goto('https://www.merrjep.al/llogaria/njoftimet-e-mija', {waitUntil: 'load', timeout: 300000});
+
   // Wait for modal to close
   await page.waitForSelector("#modal-promotion-vip-private");
   await page.click("#modal-promotion-vip-private > div > div.modal-window > div.modal-footer > button.new-btn.btn-default");
@@ -42,28 +41,73 @@ import puppeteer from 'puppeteer';
   
 
 
-  await page.waitForSelector("body > div.website-wrapper > header > div.top-header > div > div.row > div.span7 > div > div > button");
-  await page.click("body > div.website-wrapper > header > div.top-header > div > div.row > div.span7 > div > div > button");
-  await page.waitForSelector("body > div.website-wrapper > header > div.top-header > div > div.row > div.span7 > div > div > div.user-account-menu");
+  // await page.waitForSelector("body > div.website-wrapper > header > div.top-header > div > div.row > div.span7 > div > div > button");
+  // await page.click("body > div.website-wrapper > header > div.top-header > div > div.row > div.span7 > div > div > button");
+  // await page.waitForSelector("body > div.website-wrapper > header > div.top-header > div > div.row > div.span7 > div > div > div.user-account-menu");
   
-  
+  await page.waitForSelector("body > div.website-wrapper");
+  await page.goto('https://www.merrjep.al/llogaria/njoftimet-e-mija', {waitUntil: 'load', timeout: 300000});
 
   // Click Njoftimet e Mija and wait for posts to open
-  await page.click("body > div.website-wrapper > header > div.top-header > div > div.row > div.span7 > div > div > div > ul > li:nth-child(3) > a");
+  // await page.click("body > div.website-wrapper > header > div.top-header > div > div.row > div.span7 > div > div > div > ul > li:nth-child(3) > a");
   await page.waitForSelector("#ads-active > div.myads-published-all-items");
-  let idArray = await page.evaluate(() => {
+  await page.evaluate(() => {
     let carsList = document.querySelector("#ads-active > div.myads-published-all-items").children;
     let list = [...carsList];
-    
-    for(let i=0;i<list.length;i++) {
-      id.push(carsList[i].children[1].children[0].children[0].children[1].children[0].children[0].innerText.split(' ')[1]);
-    }
-    return id;
+    return list;
+  }).then(list => {
+    list.pop();
+    list.forEach(el => {
+      console.log(el.childElementCount);
+      // let adPanel = el.children[1];
+      // let mainArea = adPanel.children[0];
+      // let rightSide = mainArea.children[0].children[1];
+      // let infoBlock = rightSide.children[0];
+      // let adId = infoBlock.children[0];
+      // let id = adId.innerText.split(' ')[1];
+
+      // // Go to renew page and check renewal
+      // page.goto(`https://www.merrjep.al/njoftim/menaxho-njoftimin/${id}`,{waitUntil: 'load', timeout: 300000 });
+      // page.waitForSelector('input[value="Renewal"]');
+      // page.click('input[value="Renewal"]');
+        
+      // // Submit
+      // page.waitForSelector('input[value="Dërgoni"]');
+      // page.click('input[value="Dërgoni"]');
+        
+      //   // Go to posts
+      // page.goto('https://www.merrjep.al/llogaria/njoftimet-e-mija', {waitUntil: 'load', timeout: 300000});
+    })
   });
 
-  idArray.forEach(el => {
-    console.log(el);
-  })
+  
+  
+
+  // for(let i=0;i<posts.length;i++) {
+  //   let adPanel = posts[i]?.children[1];
+  //   let mainArea = adPanel?.children[0];
+  //   let rightSide = mainArea?.children[0].children[1];
+  //   let infoBlock = rightSide?.children[0];
+  //   let adId = infoBlock?.children[0];
+  //   let id = adId.innerText?.split(' ')[1];
+    // const id = posts[i]?.children[1].children[0].children[0].children[1].children[0].children[0].innerText.split(' ')[1];
+    // console.log(id);
+    // Go to renew page and check renewal
+    // await page.goto(`https://www.merrjep.al/njoftim/menaxho-njoftimin/${id}`,{waitUntil: 'load', timeout: 300000 });
+    // await page.waitForSelector('input[value="Renewal"]');
+    // await page.click('input[value="Renewal"]');
+
+    // Submit
+    // await page.waitForSelector('input[value="Dërgoni"]');
+    // await page.click('input[value="Dërgoni"]');
+
+    // Continue
+    // await page.waitForSelector('button.new-btn');
+    // await page.click('button.new-btn');
+
+    // Go to posts
+    //await page.goto('https://www.merrjep.al/llogaria/njoftimet-e-mija', {waitUntil: 'load', timeout: 300000});
+  // }
 
   // Go to renew page and check renewal
   // await page.goto(`https://www.merrjep.al/njoftim/menaxho-njoftimin/${id}`,{waitUntil: 'load', timeout: 300000 });
