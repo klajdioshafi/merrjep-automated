@@ -1,15 +1,10 @@
-export class MerrjepCredentials {
+const getCredentials = () => {
+  const creds = {
+    email: "denis.kallcaku@hotmail.com",
+    password: "1478963denisi",
+  };
 
-    constructor() {
-        this.email = "denis.kallcaku@hotmail.com";
-        this.password = "1478963denisi";
-    }
+  return creds;
+};
 
-    getEmail() {
-        return this.email;
-    }
-
-    getPassword() {
-        return this.password;
-    }
-}
+module.exports = { getCredentials };
