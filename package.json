@@ -4,7 +4,9 @@
   "description": "renew posts on merrjep.al automatically",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+    
   },
   "keywords": [
     "web",
@@ -13,6 +15,7 @@
   "author": "Klajdi Oshafi",
   "license": "ISC",
   "dependencies": {
+    "nodemon": "^3.1.0",
     "puppeteer": "^21.6.1"
   },
   "type": "module"

@@ -1,7 +1,7 @@
-import puppeteer, { TimeoutError } from 'puppeteer';
-import { getCredentials } from './credentials';
+import puppeteer from 'puppeteer';
+import { getCredentials } from './credentials.js';
 
-(async () => {
+const refreshPosts = async () => {
   // Launch the browser and open a new blank page
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
@@ -21,14 +21,7 @@ import { getCredentials } from './credentials';
   });
 
   await page.click(".btn.btn-block");
-  const validEmail = await page.waitForSelector('input[name = "IsCheckedEmailOrPhone"]', {timeout: 5000})
-    .then(() => {
-      return true
-    })
-    .catch((reason) => {
-      
-      return false
-  })
+  await page.waitForSelector('input[name = "IsCheckedEmailOrPhone"]', {timeout: 5000});
 
   // const validateEmail = function() {
   //   if(validEmail === true){
@@ -63,12 +56,7 @@ import { getCredentials } from './credentials';
     // });
 
   // Type Password
-  await page.type("input.form-control", getCredentials().password)
-  .then(res => {
-    console.log('Password i sakte')
-  }).catch(err => {
-    console.log('Password i pasakte!')
-  });;
+  await page.type("input.form-control", getCredentials().password);
   await page.click("body > div.website-wrapper > div.container-fluid > div > div.col-12.col-sm-12.col-md-12.col-lg-12.col-xl-12.pl-0.pr-0 > section > div > div > div > div > div.ui-form > form > button");
   
 
@@ -102,7 +90,6 @@ import { getCredentials } from './credentials';
     // Submit
     await page.waitForSelector('input[value="Dërgoni"]');
     await page.click('input[value="Dërgoni"]');
-
     // Continue
     await page.waitForSelector("body > div.website-wrapper > div.success-nopay-page.free-ad.ci-margin-b-100 > div > div > button");
     await page.click("body > div.website-wrapper > div.success-nopay-page.free-ad.ci-margin-b-100 > div > div > button");
@@ -110,4 +97,13 @@ import { getCredentials } from './credentials';
     // Go to posts
     await page.goto('https://www.merrjep.al/llogaria/njoftimet-e-mija', {waitUntil: 'load', timeout: 300000});
   }
-})();
+
+  await page.close();
+  await browser.close();
+};
+
+refreshPosts();
+
+setInterval(() => {
+  refreshPosts();
+}, 7200000);
